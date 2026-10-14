@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coartadas — Murder Puzzles</title>
+<meta name="description" content="Someone was murdered tonight. Work out where every suspect was, hour by hour. A deduction puzzle game for Android and iOS, coming soon.">
+<meta name="theme-color" content="#1F1B16">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/Staatliches-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>
+  // Language before the first paint: the visitor's choice if they made one here, else the browser's.
+  (function () {
+    var l = null;
+    try { l = localStorage.getItem('coartadas-lang'); } catch (e) { /* storage blocked: follow the browser */ }
+    if (l !== 'en' && l !== 'es') l = /^es\b/i.test(navigator.language || '') ? 'es' : 'en';
+    document.documentElement.lang = l;
+  })();
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="./">COARTADAS</a>
+    <button type="button" class="langswitch" id="langswitch">
+      <span data-l="en" aria-hidden="true">ES</span><span data-l="es" aria-hidden="true">EN</span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero__disc" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker"><span data-l="en">Murder Puzzles</span><span data-l="es">Puzles de asesinato</span></p>
+    <h1>COARTADAS</h1>
+    <div class="hero__rule" aria-hidden="true"></div>
+    <p class="line">
+      <span data-l="en">Someone was murdered tonight. Work out where every suspect was, hour by hour.</span>
+      <span data-l="es">Hubo un asesinato. Reconstruye dónde estuvo cada sospechoso, hora a hora.</span>
+    </p>
+    <p class="soon"><span class="dot" aria-hidden="true"></span>
+      <span data-l="en">Coming soon to Google Play and the App Store</span>
+      <span data-l="es">Muy pronto en Google Play y App Store</span>
+    </p>
+  </div>
+</section>
+
+<section class="section" id="case" aria-labelledby="case-title">
+  <div class="wrap">
+    <h2 id="case-title"><span data-l="en">Try a case</span><span data-l="es">Prueba un caso</span></h2>
+    <p class="lede">
+      <span data-l="en">A floor plan, three hours and three suspects. Put each one in a room for every hour: tap a suspect, then a room, or drag them there. Change the hour on the timeline. When the night adds up, accuse.</span>
+      <span data-l="es">Un plano, tres horas y tres sospechosos. Pon a cada uno en una estancia a cada hora: toca a alguien y luego una estancia, o arrástralo hasta allí. Cambia la hora en la línea de abajo. Cuando la noche cuadre, acusa.</span>
+    </p>
+    <div class="case" id="caso">
+      <p class="noscript">
+        <span data-l="en">This case needs JavaScript to play.</span>
+        <span data-l="es">Para jugar este caso hace falta JavaScript.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="game" aria-labelledby="game-title">
+  <div class="wrap">
+    <h2 id="game-title"><span data-l="en">The game</span><span data-l="es">El juego</span></h2>
+    <div class="about">
+      <div>
+        <div data-l="en">
+          <p class="first">Place every suspect in a room, hour by hour, and find out who was at the crime scene when the murder happened.</p>
+          <p>Each case gives you a floor plan, the time of the crime and a handful of clues. Work through the night until it adds up. Whoever was in that room at that hour is your killer.</p>
+        </div>
+        <div data-l="es">
+          <p class="first">Coloca a cada sospechoso en una habitación, hora a hora, y averigua quién estaba en la escena del crimen cuando ocurrió el asesinato.</p>
+          <p>Cada caso te da el plano, la hora del crimen y unas cuantas pistas. Repasa la noche hasta que todo cuadre. Quien estaba en esa habitación a esa hora es el culpable.</p>
+        </div>
+        <div class="price">
+          <p data-l="en">Free to start: the first two settings and the daily cases cost nothing. One purchase unlocks the rest of the campaign, extra cases, past days and unlimited hints. No ads, no subscriptions, no account. Plays offline.</p>
+          <p data-l="es">Gratis para empezar: los dos primeros lugares y los casos de cada día no cuestan nada. Un único pago desbloquea el resto de la campaña, los encargos, los días pasados y las pistas sin límite. Sin anuncios, sin suscripciones y sin cuenta. Funciona sin conexión.</p>
+        </div>
+      </div>
+      <ul class="facts" data-l="en">
+        <li>One solution per case, reached by reasoning, never by guessing</li>
+        <li>Tap to place, drag to move, press play to watch everyone move through the night</li>
+        <li>Settings from a country house to a ship, each with rules of its own</li>
+        <li>A regular case and a hard one every day, plus a weekly case</li>
+        <li>Hints that explain the next step when you’re stuck</li>
+        <li>Large text and reduced motion options</li>
+      </ul>
+      <ul class="facts" data-l="es">
+        <li>Una sola solución por caso, a la que se llega razonando, sin adivinar</li>
+        <li>Toca para colocar, arrastra para mover y dale al play para ver cómo se mueven todos durante la noche</li>
+        <li>Lugares que van de una casa de campo a un barco, cada uno con sus propias reglas</li>
+        <li>Cada día, un caso normal y uno difícil, y uno más cada semana</li>
+        <li>Pistas que te explican el siguiente paso cuando te atascas</li>
+        <li>Letra grande y movimiento reducido</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- No store links until the game is published: then each store gets its own link here. -->
+<section class="stores" aria-label="Stores">
+  <div class="wrap">
+    <p data-l="en">Coming soon to Google Play and the App Store</p>
+    <p data-l="es">Muy pronto en Google Play y App Store</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Trikyname</span>
+    <nav aria-label="Site">
+      <a href="privacy.html"><span data-l="en">Privacy policy</span><span data-l="es">Política de privacidad</span></a>
+      <a href="delete-data.html"><span data-l="en">Delete your data</span><span data-l="es">Borrado de tus datos</span></a>
+      <a href="mailto:trikyname@gmail.com">trikyname@gmail.com</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // The language switch: flips the page, remembers the choice on this device and tells the case.
+  (function () {
+    var titles = { en: 'Coartadas — Murder Puzzles', es: 'Coartadas — Puzles de asesinato' };
+    var sw = document.getElementById('langswitch');
+    function label(l) { sw.setAttribute('aria-label', l === 'es' ? 'View in English' : 'Ver en español'); }
+    function apply(l) {
+      document.documentElement.lang = l;
+      document.title = titles[l];
+      label(l);
+      document.dispatchEvent(new Event('langchange'));
+    }
+    sw.addEventListener('click', function () {
+      var l = document.documentElement.lang === 'es' ? 'en' : 'es';
+      try { localStorage.setItem('coartadas-lang', l); } catch (e) { /* the switch still works for this visit */ }
+      apply(l);
+    });
+    document.title = titles[document.documentElement.lang] || titles.en;
+    label(document.documentElement.lang);
+  })();
+</script>
+<script src="caso.js"></script>
+</body>
+</html>

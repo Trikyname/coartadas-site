@@ -1,0 +1,309 @@
+/* site.css — the three pages share the game's look: screen print in three inks on paper.
+   Colours, fonts and shapes come from the game (Assets/UI/Tokens.uss and
+   .docs/design/design-system.md in the game's repository). Rules carried over:
+   - three inks (red: the crime; teal: the house; ocre: what guides) and black for text and bands,
+     on paper; nothing off the ramp;
+   - ink fields are straight (bands, plates, buttons), objects are fully round (discs, chips);
+     there is no radius in between;
+   - walls are paper without ink; a room is told by the furniture inside it;
+   - anything you touch is at least 44 CSS px.
+   Fonts are the game's own, under the SIL Open Font License (fonts/LICENSES.txt). No external
+   requests, no trackers. */
+
+@font-face { font-family: "Staatliches"; src: url("fonts/Staatliches-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Karla"; src: url("fonts/Karla-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Karla"; src: url("fonts/Karla-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Caveat"; src: url("fonts/Caveat-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+
+:root {
+  /* Inks and paper (Tokens.uss). */
+  --ink-red: #A8392C;
+  --ink-teal: #1F5257;
+  --ink-ocre: #D0942B;
+  --ink-black: #1F1B16;
+  --paper: #E9E2D3;
+  /* Coverage steps used here. */
+  --red-20: #EFE0C6;
+  --teal-20: #C1C5BA;
+  --teal-28: #B0BAB0;
+  --teal-46: #8CA09A;
+  --teal-72: #587A7A;
+  --ocre-20: #E4D2B1;
+  --ocre-46: #DAB572;
+  /* Black thinned for the words under the words. --ink-25 is never text: borders only. */
+  --ink-70: #3E372E;
+  --ink-50: #5C5347;
+  --ink-40: #6E6558;
+  --ink-25: #9B9080;
+  --paper-rule: #C9BFAC;
+  --paper-deep: #DCD3C0;
+  --paper-card: #F3EEE3;
+  --over-red-ocre: #892107;
+  --over-teal-ocre: #19300F;
+
+  --font-display: "Staatliches", "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  --font-body: "Karla", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+
+  --touch: 44px;
+  --gap-band: 6px;
+  --dur-quick: 120ms;
+
+  color-scheme: light;
+  accent-color: var(--ink-red);
+}
+
+* { box-sizing: border-box; }
+html { background: var(--paper); scrollbar-color: var(--ink-25) var(--paper); -webkit-text-size-adjust: 100%; }
+/* The grain of the print: two dots of thinned black every four pixels, as on the game's canvas. */
+body {
+  margin: 0; color: var(--ink-black); font-family: var(--font-body); font-size: 18px; line-height: 1.6;
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='.8' cy='1.1' r='.75' fill='%231F1B16' opacity='.08'/%3E%3Ccircle cx='2.9' cy='3.2' r='.6' fill='%231F1B16' opacity='.05'/%3E%3C/svg%3E");
+}
+::selection { background: var(--ink-ocre); color: var(--ink-black); }
+:focus-visible { outline: 3px solid var(--ink-black); outline-offset: 3px; }
+a { color: var(--ink-red); text-underline-offset: .2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--over-red-ocre); text-decoration-thickness: 2px; }
+img, svg { display: block; max-width: 100%; }
+
+/* Language: [data-l] elements show only in the page's language (index.html sets it). */
+html[lang="en"] [data-l="es"], html[lang="es"] [data-l="en"] { display: none !important; }
+
+/* ── Bands: straight black fields edge to edge ───────────────────────────────────────────── */
+.topbar { background: var(--ink-black); color: var(--paper); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; }
+.topbar a.mark { color: var(--paper); text-decoration: none; font-family: var(--font-display); font-size: 24px;
+                 letter-spacing: 3px; line-height: 1; padding: 10px 0; }
+.topbar a.mark:hover { color: var(--ink-ocre); }
+.topbar nav { display: flex; flex-wrap: wrap; gap: 0 4px; }
+.topbar nav a { color: var(--paper); font-weight: 700; font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
+                text-decoration: none; padding: 0 10px; min-height: var(--touch); display: inline-flex; align-items: center; }
+.topbar nav a:hover { color: var(--ink-ocre); }
+.topbar :focus-visible { outline-color: var(--ink-ocre); }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+footer.foot { background: var(--ink-black); color: var(--paper-rule); margin-top: 96px; font-size: 15px; }
+footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 28px; padding-top: 22px; padding-bottom: 26px; }
+footer.foot nav { display: flex; flex-wrap: wrap; gap: 0 20px; }
+footer.foot a { color: var(--paper); text-decoration: none; min-height: var(--touch); display: inline-flex; align-items: center; }
+footer.foot a:hover { color: var(--ink-ocre); text-decoration: underline; }
+footer.foot :focus-visible { outline-color: var(--ink-ocre); }
+
+/* ── Legal pages: a long document on paper ───────────────────────────────────────────────── */
+.doc { max-width: 760px; margin: 0 auto; padding: 48px 20px 0; }
+.doc h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(34px, 6vw, 52px); letter-spacing: 2px;
+          line-height: 1.05; margin: 0 0 18px; }
+.doc h1::after { content: ""; display: block; width: 120px; height: 6px; background: var(--ink-red); margin-top: 16px; }
+.doc h2 { font-family: var(--font-display); font-weight: 400; font-size: 30px; letter-spacing: 1px; line-height: 1.1;
+          margin: 56px 0 8px; padding: 12px 16px; background: var(--ink-teal); color: var(--paper); }
+.doc h3 { font-weight: 700; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-black);
+          margin: 34px 0 6px; padding-top: 14px; border-top: 2px solid var(--paper-rule); }
+.doc p, .doc li { color: var(--ink-70); }
+.doc ul, .doc ol { padding-left: 1.3em; }
+.doc li { margin: 6px 0; }
+.doc code { font-size: .92em; background: var(--paper-deep); padding: 1px 5px; }
+.doc .meta { color: var(--ink-50); font-size: 15px; }
+.doc .lang { font-size: 15px; margin: 18px 0 0; }
+.doc .lang a { display: inline-flex; align-items: center; min-height: var(--touch); }
+.doc hr { border: 0; height: 6px; background: var(--ink-black); margin: 72px 0 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; scroll-behavior: auto !important; }
+}
+
+/* ══ The landing ═══════════════════════════════════════════════════════════════════════════ */
+
+.hero { position: relative; overflow: hidden; isolation: isolate; padding: clamp(40px, 8vw, 96px) 0 clamp(36px, 6vw, 72px); }
+/* A round object in red, off the edge: the disc of the crime, at poster size. */
+.hero__disc { position: absolute; right: -14vw; top: -18vw; width: 46vw; height: 46vw; max-width: 620px; max-height: 620px;
+              border-radius: 50%; background: var(--ink-red); z-index: -1; }
+.hero .kicker { color: var(--ink-red); font-weight: 700; font-size: clamp(13px, 1.6vw, 16px); letter-spacing: .3em;
+                text-transform: uppercase; margin: 0 0 6px; }
+.hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(64px, 15vw, 196px); line-height: .9;
+           letter-spacing: .04em; margin: 0; color: var(--ink-black); }
+.hero__rule { width: min(520px, 70%); height: 10px; background: var(--ink-black); margin: 18px 0 26px; }
+.hero .line { font-size: clamp(19px, 2.4vw, 26px); line-height: 1.4; max-width: 30ch; margin: 0 0 28px; color: var(--ink-black); }
+.soon { display: inline-flex; align-items: center; gap: 14px; background: var(--ink-black); color: var(--paper);
+        font-family: var(--font-display); font-size: clamp(18px, 2.2vw, 24px); letter-spacing: 2px; line-height: 1.15;
+        padding: 12px 20px 12px 14px; margin: 0; }
+.soon .dot { flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--ink-ocre); }
+
+.section { padding-top: clamp(56px, 8vw, 96px); }
+.section h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(36px, 5vw, 56px); letter-spacing: 1px;
+              line-height: 1; margin: 0 0 14px; }
+.section .lede { font-size: clamp(18px, 1.9vw, 20px); max-width: 60ch; margin: 0 0 28px; color: var(--ink-70); }
+
+/* The play area: the case, with its notebook beside it on a wide screen. caso.js builds the case;
+   the grid places its parts, so on a phone they stack in the game's own order. */
+.case { display: grid; grid-template-columns: minmax(0, 480px); gap: var(--gap-band); user-select: none; -webkit-user-select: none; }
+@media (min-width: 900px) {
+  .case { grid-template-columns: minmax(0, 480px) minmax(0, 1fr); column-gap: 48px; align-items: start;
+          grid-template-areas: "head note" "crime note" "plan note" "warn note" "cast note" "status note" "time note" "tools note" "verdict note"; }
+  .case__head { grid-area: head; } .case__crime { grid-area: crime; } .plan { grid-area: plan; } .case__warn { grid-area: warn; }
+  .cast { grid-area: cast; } .case__status { grid-area: status; } .timeline { grid-area: time; } .tools { grid-area: tools; }
+  .verdict { grid-area: verdict; } .notebook { grid-area: note; align-self: start; position: sticky; top: 16px; }
+}
+
+/* The game: long description and the short lines, as ruled rows. */
+.about { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 24px 56px; align-items: start; }
+.about p { margin: 0 0 18px; color: var(--ink-70); max-width: 62ch; }
+.about p.first { color: var(--ink-black); font-size: clamp(20px, 2.2vw, 24px); line-height: 1.45; }
+.facts { list-style: none; margin: 0; padding: 0; border-bottom: 2px solid var(--ink-black); }
+.facts li { padding: 14px 0 14px 34px; border-top: 2px solid var(--ink-black); position: relative; color: var(--ink-black); }
+.facts li::before { content: ""; position: absolute; left: 4px; top: 21px; width: 14px; height: 14px; border-radius: 50%; background: var(--ink-teal); }
+.price { background: var(--ocre-20); border-left: 8px solid var(--ink-ocre); padding: 18px 22px; margin-top: 28px; }
+.price p { margin: 0; color: var(--ink-black); }
+
+.stores { margin-top: clamp(56px, 8vw, 96px); background: var(--ink-teal); color: var(--paper); }
+.stores .wrap { padding-top: 30px; padding-bottom: 30px; }
+main:has(> .stores:last-child) + .foot { margin-top: 0; }
+.stores p { margin: 0; font-family: var(--font-display); font-size: clamp(26px, 3.6vw, 40px); letter-spacing: 1px; line-height: 1.1; }
+
+.langswitch { background: transparent; border: 2px solid var(--paper); color: var(--paper); font-family: var(--font-body);
+              font-weight: 700; font-size: 13px; letter-spacing: .2em; min-height: var(--touch); min-width: var(--touch);
+              padding: 0 12px; cursor: pointer; border-radius: 0; }
+.langswitch:hover { background: var(--paper); color: var(--ink-black); }
+
+@media (max-width: 900px) {
+  .about { grid-template-columns: minmax(0, 1fr); }
+  .hero__disc { right: -18vw; top: -12vw; width: 50vw; height: 50vw; }
+}
+
+/* ══ The case (caso.js) ═════════════════════════════════════════════════════════════════════ */
+
+.case .noscript { background: var(--paper-card); border-left: 8px solid var(--ink-red); padding: 16px 18px; margin: 0; }
+
+.case__head { background: var(--ink-black); color: var(--paper); padding: 10px 16px 12px; }
+.case__label { display: block; font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--paper-rule); }
+.case__title { display: block; font-family: var(--font-display); font-size: 26px; letter-spacing: 1px; line-height: 1.1; }
+
+.case__crime { background: var(--ink-red); color: var(--paper); display: flex; align-items: center; gap: 12px; padding: 10px 14px; }
+.case__crime .disc { width: 30px; height: 30px; flex: none; }
+.case__crimeline { font-family: var(--font-display); font-size: 21px; letter-spacing: 1px; line-height: 1.15; text-transform: uppercase; }
+
+/* The plan: the SVG draws the house; rooms and chips are buttons laid over it. */
+.plan { position: relative; aspect-ratio: 1000 / 800; touch-action: manipulation; }
+.plan__art { width: 100%; height: 100%; }
+.plan__art text { font-family: var(--font-display); font-size: 40px; letter-spacing: 1px; }
+.plan__scene { opacity: 0; transition: opacity .25s; }
+.plan.is-crime-hour .plan__scene { opacity: 1; }
+.room { position: absolute; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; border-radius: 0; }
+.room:focus-visible { outline: 4px solid var(--ink-black); outline-offset: -8px; }
+.room.is-target:hover, .room.is-over { box-shadow: inset 0 0 0 6px var(--ink-black); }
+.room.is-over { background: rgba(31, 27, 22, .08); }
+
+.chip { position: absolute; width: max(46px, 13%); aspect-ratio: 1; transform: translate(-50%, -50%);
+        margin: 0; padding: 0; border: 0; background: none; cursor: grab; touch-action: none;
+        transition: left .45s cubic-bezier(.45, 0, .2, 1), top .45s cubic-bezier(.45, 0, .2, 1), opacity .2s; }
+.chip.is-off { opacity: 0; pointer-events: none; }
+.chip .chip__disc { width: 100%; height: 100%; }
+.chip__name { position: absolute; left: 50%; top: calc(100% + 3px); transform: translateX(-50%); background: var(--paper);
+              color: var(--ink-black); font-weight: 700; font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+              line-height: 1; padding: 3px 5px 2px; white-space: nowrap; }
+.chip.is-selected .chip__disc { box-shadow: 0 0 0 4px var(--paper), 0 0 0 8px var(--ink-black); }
+.chip:focus-visible { outline: none; }
+.chip:focus-visible .chip__disc { box-shadow: 0 0 0 4px var(--paper), 0 0 0 8px var(--ink-ocre); }
+.case.is-still .chip, .case.is-still .plan__scene { transition: none; }
+
+/* A disc with its figure; the paper ring keeps it apart from any floor. */
+.chip__disc { display: grid; place-items: center; border-radius: 50%; box-shadow: 0 0 0 4px var(--paper); }
+.chip__disc svg { width: 64%; height: 64%; }
+.chip--red .chip__disc { background: var(--ink-red); }
+.chip--teal .chip__disc { background: var(--ink-teal); }
+.chip--ocre .chip__disc { background: var(--ink-ocre); }
+
+.ghost { position: fixed; left: 0; top: 0; width: 56px; height: 56px; margin: -28px 0 0 -28px; pointer-events: none; z-index: 50; }
+.ghost .chip__disc { width: 100%; height: 100%; box-shadow: 0 0 0 4px var(--paper), 0 10px 24px -6px rgba(31, 27, 22, .5); }
+
+.case__warn { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.case__warn:empty { display: none; }
+.case__warn li { display: flex; align-items: baseline; gap: 4px 10px; flex-wrap: wrap; background: var(--red-20); border-left: 6px solid var(--ink-red);
+                 padding: 8px 12px; font-size: 15px; line-height: 1.4; color: var(--ink-black); }
+.case__warnplate { font-family: var(--font-display); font-size: 17px; letter-spacing: 1px; color: var(--ink-red); text-transform: uppercase; }
+
+/* The cast: who you can put on the plan. Placed at this hour, the disc fades (it is on the plan). */
+.cast { display: flex; justify-content: space-around; gap: 8px; padding: 10px 0 0; }
+.cast__person { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 76px; min-height: var(--touch);
+                margin: 0; padding: 6px 4px; border: 0; background: none; cursor: grab; color: var(--ink-black); touch-action: none; }
+.cast__person .chip__disc { width: 60px; height: 60px; transition: opacity var(--dur-quick); }
+.cast__person.is-placed .chip__disc { opacity: .32; }
+.cast__person.is-selected .chip__disc { opacity: 1; box-shadow: 0 0 0 4px var(--paper), 0 0 0 8px var(--ink-black); }
+.cast__name { font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.cast__person:focus-visible { outline: none; }
+.cast__person:focus-visible .chip__disc { box-shadow: 0 0 0 4px var(--paper), 0 0 0 8px var(--ink-ocre); }
+
+.case__status { margin: 0; min-height: 3em; font-size: 15px; line-height: 1.45; color: var(--ink-70); text-align: center; padding: 0 8px; }
+.case__status.is-flash { animation: flash .5s; }
+@keyframes flash { 30% { color: var(--ink-red); } }
+
+/* The timeline: a black band, the play square in ocre, the hours as pills. */
+.timeline { background: var(--ink-black); display: flex; align-items: center; gap: 12px; padding: 8px 10px; }
+.timeline__play { flex: none; width: var(--touch); height: var(--touch); background: var(--ink-ocre); border: 0; border-radius: 0;
+                  display: grid; place-items: center; cursor: pointer; padding: 0; }
+.timeline__play svg { width: 22px; height: 22px; }
+.timeline__play:focus-visible { outline-color: var(--paper); }
+.timeline__hours { flex: 1; display: flex; justify-content: space-between; position: relative; }
+.timeline__hours::before { content: ""; position: absolute; left: 22px; right: 22px; top: 50%; height: 3px; margin-top: -1px; background: var(--ink-50); }
+.hour { position: relative; min-width: 64px; min-height: var(--touch); margin: 0; padding: 0; border: 0; background: none; cursor: pointer;
+        display: grid; place-items: center; }
+.hour__pill { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 18px;
+              font-family: var(--font-display); font-size: 19px; letter-spacing: 1px; color: var(--ink-25); background: var(--ink-black); }
+.hour__pill .disc { width: 20px; height: 20px; }
+.hour.hour--crime .hour__pill { background: var(--ink-red); color: var(--paper); padding-left: 8px; }
+.hour.is-current .hour__pill { background: var(--paper); color: var(--ink-black); }
+.hour.hour--crime.is-current .hour__pill { background: var(--ink-red); color: var(--paper); box-shadow: 0 0 0 3px var(--paper); }
+.hour:hover .hour__pill { color: var(--paper); }
+.hour.is-current:hover .hour__pill { color: var(--ink-black); }
+.hour.hour--crime.is-current:hover .hour__pill { color: var(--paper); }
+.hour:focus-visible { outline: none; }
+.hour:focus-visible .hour__pill { box-shadow: 0 0 0 3px var(--ink-ocre); }
+
+/* Tools: straight fields; the accusation is the red one. */
+.tools { display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: var(--gap-band); }
+.tool { min-height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+        border: 2px solid var(--paper-rule); background: var(--paper-card); color: var(--ink-black); border-radius: 0; cursor: pointer;
+        padding: 6px 8px; font: inherit; transition: background var(--dur-quick); }
+.tool:hover:not(:disabled) { background: var(--ocre-20); }
+.tool__label { font-family: var(--font-display); font-size: 20px; letter-spacing: 1px; line-height: 1.1; text-transform: uppercase; }
+.tool__reason { font-size: 12px; color: var(--ink-50); line-height: 1.2; }
+.tool__reason:empty { display: none; }
+.tool:disabled { cursor: default; background: var(--paper-deep); border-color: var(--paper-deep); }
+.tool:disabled .tool__label { color: var(--ink-40); }
+.tool--accuse { background: var(--ink-red); border-color: var(--ink-red); color: var(--paper); }
+.tool--accuse:hover:not(:disabled) { background: var(--over-red-ocre); }
+.tool--accuse:disabled { background: var(--paper-deep); border-color: var(--paper-deep); }
+.tool--wide { width: 100%; }
+
+/* The notebook: evidence on paper cards with the ocre edge, written by hand. */
+.notebook { background: var(--paper-deep); border-top: 4px solid var(--ink-black); padding: 14px 16px 18px; }
+.notebook__title { margin: 0 0 10px; font-weight: 700; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-50); }
+.notebook__rules-title { margin-top: 22px; }
+.clues { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.clue { background: var(--paper-card); border-left: 8px solid var(--ink-ocre); padding: 8px 14px 10px; }
+.clue__label { display: block; font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-50); }
+.clue__text { display: block; font-family: var(--font-hand); font-size: 26px; line-height: 1.2; color: var(--ink-black); }
+.rules { margin: 0; padding: 0 0 0 1.1em; font-size: 15px; line-height: 1.5; color: var(--ink-70); }
+.rules li { margin: 4px 0; }
+
+/* The verdict: the only place where the night is right or wrong. */
+.verdict { outline: none; }
+.verdict[hidden] { display: none; }
+.verdict__accused { display: flex; align-items: center; gap: 14px; margin: 6px 0 10px; font-family: var(--font-display);
+                    font-size: 24px; letter-spacing: 1px; text-transform: uppercase; }
+.verdict__accused .chip__disc { width: 52px; height: 52px; }
+.verdict__accused--none { font-family: var(--font-body); font-size: 17px; letter-spacing: 0; text-transform: none; }
+.verdict__band { position: relative; overflow: hidden; padding: 22px 20px 20px; color: var(--paper); }
+.verdict--failed .verdict__band { background: var(--ink-red); }
+.verdict--solved .verdict__band { background: var(--ink-teal); }
+.verdict__band::after { content: ""; position: absolute; right: -60px; top: -70px; width: 190px; height: 190px; border-radius: 50%; }
+.verdict--failed .verdict__band::after { background: var(--over-red-ocre); }
+.verdict--solved .verdict__band::after { background: var(--over-teal-ocre); }
+.verdict__word { position: relative; z-index: 1; margin: 0; font-family: var(--font-display); font-size: clamp(48px, 8vw, 64px); line-height: .95; letter-spacing: 1px; text-transform: uppercase; }
+.verdict__word::after { content: ""; display: block; width: 60%; height: 5px; background: var(--paper); margin: 12px 0; }
+.verdict__line { position: relative; z-index: 1; margin: 0; font-weight: 700; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+.verdict__stamp { position: relative; z-index: 1; display: inline-block; margin-top: 16px; border: 3px solid var(--paper); padding: 4px 12px 2px;
+                  font-family: var(--font-display); font-size: 22px; letter-spacing: 3px; text-transform: uppercase; transform: rotate(-4deg); }
+.verdict__soon { margin: 12px 0; font-size: 16px; color: var(--ink-black); }
+.verdict .tool { margin-top: var(--gap-band); }
