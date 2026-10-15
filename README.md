@@ -31,7 +31,14 @@ dominios (las fuentes van en `fonts/`). Funciona en el móvil.
   `.docs/design/design-system.md`.
 - `fonts/`: las fuentes del juego (Staatliches, Karla y Caveat), con licencia SIL OFL 1.1, que
   permite incrustarlas en una web; el texto de la licencia está en `fonts/LICENSES.txt`.
-- `favicon.svg`: el disco del crimen.
+- `favicon.svg`, `favicon-32.png` y `apple-touch-icon.png`: el icono del juego (disco y cerradura).
+- `share.png`: la imagen que enseñan las redes y los chats al compartir el enlace (1200×630, en
+  inglés; `og:image` en `index.html`).
+- La cabecera de la portada (cerradura sobre disco ocre y campo azul) es un SVG dentro de
+  `index.html`; en el móvil pasa a ser una banda encima del nombre.
+
+El icono, la imagen para compartir y la cabecera salen de los gráficos de tienda de Claude Design,
+guardados en `.docs/design/tienda/entrega/` del repo del juego.
 
 ## Cuando salga en las tiendas
 
